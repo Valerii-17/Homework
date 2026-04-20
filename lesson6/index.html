@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--Homework 6.1-->
+<script>
+    const person = {
+        name: "John",
+        age: 35,
+        place: "Berlin",
+    }
+    for (const key in person) {
+        console.log(key, person[key]);
+    }
+</script>
+
+
+<!--Homework 6.2-->
+<script>
+    const numbers = [1, 2, 3, 4, 5, 6, 28, 4, 12];
+
+    const evenNumbers = numbers.filter(num => num % 2 === 0);
+
+    console.log(evenNumbers);
+</script>
+
+
+<!--Homework 6.3-->
+<script>
+    const book = {
+        contacts: [
+            {
+                name: "John",
+                phone: 6195553322,
+                email: "john@ex.com"
+            },
+            {
+                name: "Kim",
+                phone: 8582223355,
+                email: "kim@ex.com"
+            },
+            {
+                name: "Ben",
+                phone: 6190000732,
+                email: "ben@ex.com"
+            }
+        ],
+
+        findContact(name) {
+            return book.contacts.find(contact => contact.name === name);
+        },
+
+        addContact(newContact) {
+            book.contacts.push(newContact);
+        }
+    };
+    book.addContact({
+        name: "Anna",
+        phone: 8581234567,
+        email: "anna@ex.com"
+    });
+    console.log(book.findContact("John"));
+    console.log(book.contacts);
+</script>
+
+</body>
+</html>
