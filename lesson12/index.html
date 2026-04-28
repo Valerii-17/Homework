@@ -96,7 +96,16 @@
         }
 
         const li = document.createElement("li");
-        li.innerHTML = `${taskText} <button class="delete-btn">Delete</button>`;
+
+        const text = document.createElement("span");
+        text.textContent = taskText;
+
+        const btn = document.createElement("button");
+        btn.textContent = "Delete";
+        btn.classList.add("delete-btn");
+
+        li.appendChild(text);
+        li.appendChild(btn);
 
         list.appendChild(li);
         input.value = "";
