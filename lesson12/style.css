@@ -1,0 +1,47 @@
+button
+{
+    width: auto;
+    height: auto;
+    border-radius: 5px;
+    border: 1px solid blue;
+    padding: 5px;
+    color: black;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    background-color: #c4cccc;
+    cursor: pointer;
+}
+.btn1{
+    background: #d0ebff;
+}
+
+#parent {
+    margin-top: 200px;
+}
+
+
+.todo {
+
+    margin-top: 100px;
+}
+
+.todo-list li {
+    margin-bottom: 10px;
+    font-size: 22px;
+}
+
+.delete-btn,
+.add-btn {
+    font-size: 16px;
+    margin-left: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+    background: none;
+}
+
+.todo-input {
+    padding: 8px;
+    width: auto;
+    font-size: 16px;
+}
