@@ -22,7 +22,7 @@ form.addEventListener("submit", function (event) {
 
     const formObj = {};
     formData.forEach((value, key) => {
-        formObj[key] = value.trim();
+        formObj[key] = value;
     });
 
     const nameError = document.querySelector(".name-error");
@@ -58,7 +58,7 @@ form.addEventListener("submit", function (event) {
         phoneError.textContent = "Phone number is required";
         isValid = false;
     } else if (!phoneRegExp.test(formObj.phone)) {
-        phoneError.textContent = "Phone must start with +380 and contain 9 digits after it";
+        phoneError.textContent = "Phone must start only with +380 and contain 9 digits after it";
         isValid = false;
     }
 
