@@ -68,11 +68,12 @@
     margin-top: 30px;
 }
 .team-card__name {
+    color: #323264;
     font-weight: 700;
 }
 
 .team-card__role {
-    color: #777;
+    color: #B3B3BA;
 }
 
 .team__btn {
