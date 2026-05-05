@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+<div class="container team__container">
+
+    <button class="team__btn team__btn--prev">
+        <svg class="arrow-icon">
+            <use href="./img/sprite.svg#arrow-left"></use>
+        </svg>
+    </button>
+    <div class="team__slider">
+
+        <article class="team-card is-active">
+            <div class="team-card__img">
+                <img src="./img/team.png" alt="Team member">
+            </div>
+
+            <div class="team-card__content">
+                <h2 class="team-card__quote">
+                    Ми звикли брати на себе відповідальність та завжди гарантуємо чесну, вчасну допомогу, навіть у
+                    ситуаціях, коли більшість безсилі.
+                </h2>
+                <div class="team-card__person">
+                    <div class="team-card__name">Олександр Олександровський</div>
+                    <div class="team-card__role">Керуючий партнер</div>
+                </div>
+            </div>
+        </article>
+
+        <article class="team-card">
+            <div class="team-card__img">
+                <img src="./img/img.png" alt="Team member">
+            </div>
+
+            <div class="team-card__content">
+                <h2 class="team-card__quote">
+                    We are used to taking responsibility and always guarantee honest, timely assistance, even in
+                    situations where most are powerless. </h2>
+
+                <div class="team-card__person">
+                    <div class="team-card__name">Ірина Іваненко</div>
+                    <div class="team-card__role">Юрист</div>
+                </div>
+            </div>
+        </article>
+
+        <article class="team-card">
+            <div class="team-card__img">
+                <img src="./img/img_1.png" alt="Team member">
+            </div>
+
+            <div class="team-card__content">
+
+                <h2 class="team-card__quote">
+                    We can add any number of slides and the logic will continue to work.
+                </h2>
+
+                <div class="team-card__person">
+                    <div class="team-card__name">Петро Петренко</div>
+                    <div class="team-card__role">Партнер</div>
+                </div>
+            </div>
+        </article>
+
+        <article class="team-card">
+            <div class="team-card__img">
+                <img src="./img/img_2.png" alt="Team member">
+            </div>
+
+            <div class="team-card__content">
+
+                <h2 class="team-card__quote">
+                    We can add any number of slides. But the dots should be added
+                    manualy.
+                </h2>
+
+                <div class="team-card__person">
+                    <div class="team-card__name">Evgeny Patrikov</div>
+                    <div class="team-card__role">Equity partner, Attorney-at-law</div>
+                </div>
+            </div>
+        </article>
+
+    </div>
+
+    <button class="team__btn team__btn--next">
+        <svg class="arrow-icon">
+            <use href="./img/sprite.svg#arrow-right"></use>
+        </svg>
+    </button>
+
+    <div class="team__pager" aria-label="Team slider pagination">
+        <button class="pager-dot is-active" type="button" aria-label="Slide 1"></button>
+        <button class="pager-dot" type="button" aria-label="Slide 2"></button>
+        <button class="pager-dot" type="button" aria-label="Slide 3"></button>
+        <button class="pager-dot" type="button" aria-label="Slide 4"></button>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
