@@ -55,25 +55,27 @@ coach3.displayInfo();
 // Homework 17.3
 
 class BankAccount {
+    #balance;
+
     constructor(balance) {
-        this.balance = balance;
+        this.#balance = balance;
     }
 
+
     getBalance() {
-        return this.balance;
+        return this.#balance;
     }
 
     deposit(amount) {
-        this.balance += amount;
+        this.#balance += amount;
     }
 
     withdraw(amount) {
-        if (amount > this.balance) {
+        if (amount > this.#balance) {
             console.log('Insufficient funds');
             return;
         }
-
-        this.balance -= amount;
+        this.#balance -= amount;
     }
 }
 
@@ -85,3 +87,4 @@ console.log(`Your balance is:`, account1.getBalance());
 
 account1.withdraw(200);
 console.log(`Your balance is:`, account1.getBalance());
+
