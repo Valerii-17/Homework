@@ -8,124 +8,123 @@
 
 </head>
 <body>
-    <div class="container">
-        
-        <div class="input-group">
-            <label for="secondsInput">Enter time in seconds:</label>
-            <input type="number" id="secondsInput" value="85" min="1">
-        </div>
+<div class="container">
 
-        <div class="timer-display" id="display">01:25</div>
-
-        <div class="controls">
-            <button id="startBtn">Start</button>
-            <button id="stopBtn" disabled>Stop</button>
-            <button id="resetBtn">Reset</button>
-        </div>
+    <div class="input-group">
+        <label for="secondsInput">Enter time in seconds:</label>
+        <input type="number" id="secondsInput" value="85" min="1">
     </div>
 
-    <script>
-        class Timer {
-            constructor(seconds, displayElement) {
-                this.totalSeconds = seconds;
-                this.remainingSeconds = seconds;
-                this.displayElement = displayElement;
+    <div class="timer-display" id="display">01:25</div>
 
-                this.intervalId = null;
-                this.isRunning = false;
+    <div class="controls">
+        <button id="startBtn">Start</button>
+        <button id="stopBtn" disabled>Stop</button>
+        <button id="resetBtn">Reset</button>
+    </div>
+</div>
 
-                this.display();
-            }
+<script>
+    class Timer {
+        constructor(seconds, displayElement) {
+            this.totalSeconds = seconds;
+            this.remainingSeconds = seconds;
+            this.displayElement = displayElement;
 
-            start() {
-                if (this.isRunning) return;
+            this.intervalId = null;
+            this.isRunning = false;
 
-                this.isRunning = true;
-
-                this.intervalId = setInterval(() => {
-                    if (this.remainingSeconds <= 0) {
-                        this.stop();
-
-                        startBtn.disabled = false;
-                        stopBtn.disabled = true;
-                        secondsInput.disabled = false;
-
-                        return;
-                    }
-
-                    this.remainingSeconds--;
-                    this.display();
-
-                }, 1000);
-            }
-
-            stop() {
-                clearInterval(this.intervalId);
-                this.isRunning = false;
-            }
-
-            display() {
-                const minutes = Math.floor(this.remainingSeconds / 60);
-                const seconds = this.remainingSeconds % 60;
-
-                const formattedTime =
-                    `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-
-                this.displayElement.textContent = formattedTime;
-            }
-
-            reset(seconds = this.totalSeconds) {
-                this.stop();
-
-                this.totalSeconds = seconds;
-                this.remainingSeconds = seconds;
-
-                this.display();
-            }
+            this.display();
         }
 
-        const secondsInput = document.querySelector('#secondsInput');
-        const startBtn = document.querySelector('#startBtn');
-        const stopBtn = document.querySelector('#stopBtn');
-        const resetBtn = document.querySelector('#resetBtn');
-        const display = document.querySelector('#display');
+        start() {
+            if (this.isRunning) return;
 
-        let timer = new Timer(+secondsInput.value, display);
+            this.isRunning = true;
 
-        secondsInput.addEventListener('change', () => {
-            const newSeconds = +secondsInput.value;
+            this.intervalId = setInterval(() => {
+                if (this.remainingSeconds <= 0) {
+                    this.stop();
 
-            if (newSeconds > 0) {
-                timer.reset(newSeconds);
+                    startBtn.disabled = false;
+                    stopBtn.disabled = true;
+                    secondsInput.disabled = false;
 
-                startBtn.disabled = false;
-                stopBtn.disabled = true;
-            }
-        });
+                    return;
+                }
 
-        startBtn.addEventListener('click', () => {
-            timer.start();
+                this.remainingSeconds--;
+                this.display();
 
-            startBtn.disabled = true;
-            stopBtn.disabled = false;
-            secondsInput.disabled = true;
-        });
+            }, 1000);
+        }
 
-        stopBtn.addEventListener('click', () => {
-            timer.stop();
+        stop() {
+            clearInterval(this.intervalId);
+            this.isRunning = false;
+        }
+
+        display() {
+            const minutes = Math.floor(this.remainingSeconds / 60);
+            const seconds = this.remainingSeconds % 60;
+
+            const formattedTime = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+            this.displayElement.textContent = formattedTime;
+        }
+
+        reset(seconds = this.totalSeconds) {
+            this.stop();
+
+            this.totalSeconds = seconds;
+            this.remainingSeconds = seconds;
+
+            this.display();
+        }
+    }
+
+    const secondsInput = document.querySelector('#secondsInput');
+    const startBtn = document.querySelector('#startBtn');
+    const stopBtn = document.querySelector('#stopBtn');
+    const resetBtn = document.querySelector('#resetBtn');
+    const display = document.querySelector('#display');
+
+    let timer = new Timer(+secondsInput.value, display);
+
+    secondsInput.addEventListener('change', () => {
+        const newSeconds = +secondsInput.value;
+
+        if (newSeconds > 0) {
+            timer.reset(newSeconds);
 
             startBtn.disabled = false;
             stopBtn.disabled = true;
-            secondsInput.disabled = false;
-        });
+        }
+    });
 
-        resetBtn.addEventListener('click', () => {
-            timer.reset(+secondsInput.value);
+    startBtn.addEventListener('click', () => {
+        timer.start();
 
-            startBtn.disabled = false;
-            stopBtn.disabled = true;
-            secondsInput.disabled = false;
-        });
-    </script>
+        startBtn.disabled = true;
+        stopBtn.disabled = false;
+        secondsInput.disabled = true;
+    });
+
+    stopBtn.addEventListener('click', () => {
+        timer.stop();
+
+        startBtn.disabled = false;
+        stopBtn.disabled = true;
+        secondsInput.disabled = false;
+    });
+
+    resetBtn.addEventListener('click', () => {
+        timer.reset(+secondsInput.value);
+
+        startBtn.disabled = false;
+        stopBtn.disabled = true;
+        secondsInput.disabled = false;
+    });
+</script>
 </body>
 </html>
