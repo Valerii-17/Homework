@@ -48,7 +48,8 @@ body {
 .date {
     margin-top: 5px;
     font-size: 16px;
-    opacity: 0.8;
+    opacity: 0.9;
+    color: white;
 }
 
 
@@ -89,25 +90,22 @@ body {
 .refresh-btn {
     width: 45px;
     height: 45px;
-
     margin: 20px auto 0;
-
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 30px;
     color: white;
     cursor: pointer;
-    border-radius: 50%;
+    border: none;
+    outline: none;
     transition: 0.3s;
-    background: rgba(255, 255, 255, 0.08);
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
 }
 
 .refresh-btn:hover {
     transform: rotate(180deg) scale(1.1);
 
-    background: rgba(255, 255, 255, 0.15);
 }
 
 .rotate {
