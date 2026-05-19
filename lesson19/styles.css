@@ -1,0 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #1769af, #00f2fe);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.weather {
+    width: 320px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    padding: 30px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.weather-icon {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    display: block;
+}
+
+.city {
+    font-size: 32px;
+    margin-bottom: 15px;
+    color: #014d91;
+
+}
+
+.date-block {
+    margin-bottom: 20px;
+}
+
+.time {
+    font-size: 42px;
+    font-weight: bold;
+}
+
+.date {
+    margin-top: 5px;
+    font-size: 16px;
+    opacity: 0.8;
+}
+
+
+.temperature {
+    font-size: 72px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #014d91;
+}
+
+.description {
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-transform: capitalize;
+}
+
+#feels {
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.feels {
+    margin-top: 5px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.details {
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+.details p {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.refresh-btn {
+    width: 45px;
+    height: 45px;
+
+    margin: 20px auto 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: 0.3s;
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.refresh-btn:hover {
+    transform: rotate(180deg) scale(1.1);
+
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.rotate {
+    animation: spin 0.7s linear;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
