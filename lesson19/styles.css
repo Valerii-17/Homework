@@ -14,7 +14,7 @@ body {
 
 .weather {
     width: 320px;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgb(122, 192, 243);
     border-radius: 16px;
     padding: 30px;
     color: white;
