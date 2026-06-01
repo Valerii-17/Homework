@@ -1,3 +1,6 @@
+import './scss/main.scss';
+import $ from 'jquery';
+
 class TodoList {
 
     constructor() {
