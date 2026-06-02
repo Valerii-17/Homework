@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="get">GET</button>
+    <button id="post">POST</button>
+    <button id="delete">DELETE</button>
+    <button id="put">PUT</button>
+
+    <br>
+    <br>
+    <label>
+        ID
+        <input type="text" name="id" id="todo-id"/>
+    </label>
+    <label>
+        Text
+        <input type="text" name="text" id="todo-text"/>
+    </label>
+</body>
+<script>
+    const getResponse = async () => fetch('http://localhost:8080/todos');
+    document.querySelector('#get').addEventListener('click', async () => {
+        const response = await getResponse();
+        const data = await response.json();
+    })
+
+    const postResponse = async () => fetch('http://localhost:8080/todos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            text: 'test',
+            checked: false,
+        })
+    })
+    document.querySelector('#post').addEventListener('click', async () => {
+        const response = await postResponse();
+        const data = await response.json();
+    })
+
+    const deleteResponse = async (id) => fetch(`http://localhost:8080/todos/${id}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+    })
+    document.querySelector('#delete').addEventListener('click', async () => {
+        const response = await deleteResponse(document.querySelector('#todo-id').value);
+        const data = await response.json();
+        console.log(data);
+    })
+
+    const putResponse = async (id, text) => fetch(`http://localhost:8080/todos/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            text,
+            checked: false,
+        })
+    })
+    document.querySelector('#put').addEventListener('click', async () => {
+        const response = await putResponse(
+            document.querySelector('#todo-id').value, 
+            document.querySelector('#todo-text').value
+        );
+        const data = await response.json();
+        console.log(data);
+    })
+</script>
+</html>
