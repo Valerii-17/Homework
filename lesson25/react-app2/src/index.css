@@ -1,0 +1,21 @@
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+
+body {
+    margin: 0;
+    background: rgba(11, 230, 157, 0.32);
+}
+.result {
+    min-height: auto;
+    border-radius: 3px;
+    border: #24a3ff solid 1px;
+}
+.form-control {
+    background: #24a3ff;
+}
+
+.btn-outline-secondary{
+    background: rgba(241, 68, 88, 0.56);
+    color: black;
+    border-radius: 2px;
+}
