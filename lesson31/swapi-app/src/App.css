@@ -1,0 +1,43 @@
+.app {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.controls {
+    margin-bottom: 20px;
+}
+
+.input {
+    width: 280px;
+    padding: 8px;
+    margin-right: 10px;
+    background: #f4f4f4;
+}
+
+.button {
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.button-clear{
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    background: #e6e67d;
+}
+
+.result {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+.footer {
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid #ccc;
+}
