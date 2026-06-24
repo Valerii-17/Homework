@@ -1,8 +1,10 @@
 import {
+    call,
     put,
     takeEvery,
-    select,
 } from "redux-saga/effects";
+
+import { API_URL } from "../constants";
 
 import {
     setTodos,
@@ -13,84 +15,165 @@ import {
     clearCompletedSuccess,
 } from "../slices/todoSlice";
 
-function* loadTodosWorker() {
-    const todos =
-        JSON.parse(
-            localStorage.getItem("todos")
-        ) || [];
+function fetchHelper(url, options) {
+    return fetch(url, options).then(
+        (response) => {
+            if (!response.ok) {
+                throw new Error("Request error");
+            }
 
-    yield put(setTodos(todos));
+            return response.json();
+        }
+    );
+}
+
+function* loadTodosWorker() {
+    try {
+        const todos = yield call(
+            fetchHelper,
+            API_URL
+        );
+
+        yield put(setTodos(todos));
+    } catch (e) {
+        console.log(e);
+    }
 }
 
 function* addTodoWorker(action) {
-    yield put(addTodoSuccess(action.payload));
+    try {
+        const todo = yield call(
+            fetchHelper,
+            API_URL,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type":
+                        "application/json",
+                },
+                body: JSON.stringify(
+                    action.payload
+                ),
+            }
+        );
 
-    const todos = yield select(
-        (state) => state.todo.todos
-    );
-
-    localStorage.setItem(
-        "todos",
-        JSON.stringify(todos)
-    );
+        yield put(
+            addTodoSuccess(todo)
+        );
+    } catch (e) {
+        console.log(e);
+    }
 }
 
 function* deleteTodoWorker(action) {
-    yield put(
-        deleteTodoSuccess(action.payload)
-    );
+    try {
+        const deletedTodo = yield call(
+            fetchHelper,
+            `${API_URL}/${action.payload}`,
+            {
+                method: "DELETE",
+            }
+        );
 
-    const todos = yield select(
-        (state) => state.todo.todos
-    );
-
-    localStorage.setItem(
-        "todos",
-        JSON.stringify(todos)
-    );
+        yield put(
+            deleteTodoSuccess(
+                deletedTodo.id
+            )
+        );
+    } catch (e) {
+        console.log(e);
+    }
 }
 
 function* toggleTodoWorker(action) {
-    yield put(
-        toggleTodoSuccess(action.payload)
-    );
+    try {
+        const updatedTodo = yield call(
+            fetchHelper,
+            `${API_URL}/${action.payload.id}`,
+            {
+                method: "PUT",
+                headers: {
+                    "Content-Type":
+                        "application/json",
+                },
+                body: JSON.stringify({
+                    ...action.payload,
+                    completed:
+                        !action.payload.completed,
+                }),
+            }
+        );
 
-    const todos = yield select(
-        (state) => state.todo.todos
-    );
-
-    localStorage.setItem(
-        "todos",
-        JSON.stringify(todos)
-    );
+        yield put(
+            toggleTodoSuccess(
+                updatedTodo
+            )
+        );
+    } catch (e) {
+        console.log(e);
+    }
 }
 
 function* editTodoWorker(action) {
-    yield put(
-        editTodoSuccess(action.payload)
-    );
+    try {
+        const currentTodo = yield call(
+            fetchHelper,
+            `${API_URL}/${action.payload.id}`
+        );
 
-    const todos = yield select(
-        (state) => state.todo.todos
-    );
+        const updatedTodo = yield call(
+            fetchHelper,
+            `${API_URL}/${action.payload.id}`,
+            {
+                method: "PUT",
+                headers: {
+                    "Content-Type":
+                        "application/json",
+                },
+                body: JSON.stringify({
+                    ...currentTodo,
+                    text: action.payload.text,
+                }),
+            }
+        );
 
-    localStorage.setItem(
-        "todos",
-        JSON.stringify(todos)
-    );
+        yield put(
+            editTodoSuccess(
+                updatedTodo
+            )
+        );
+    } catch (e) {
+        console.log(e);
+    }
 }
 
 function* clearCompletedWorker() {
-    yield put(clearCompletedSuccess());
+    try {
+        const todos = yield call(
+            fetchHelper,
+            API_URL
+        );
 
-    const todos = yield select(
-        (state) => state.todo.todos
-    );
+        const completedTodos = todos.filter(
+            (todo) => todo.completed
+        );
 
-    localStorage.setItem(
-        "todos",
-        JSON.stringify(todos)
-    );
+        for (const todo of completedTodos) {
+            yield call(
+                fetchHelper,
+                `${API_URL}/${todo.id}`,
+                {
+                    method: "DELETE",
+                }
+            );
+        }
+
+        yield put(
+            clearCompletedSuccess()
+        );
+    } catch (e) {
+        console.log(e);
+    }
 }
 
 export function* watchTodos() {

@@ -28,11 +28,10 @@ const App = () => {
 
             <TodoForm />
 
-            {todos.map((todo, index) => (
+            {todos.map((todo) => (
                 <TodoItem
-                    key={index}
+                    key={todo.id}
                     todo={todo}
-                    index={index}
                 />
             ))}
 

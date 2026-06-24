@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-const TodoItem = ({ todo, index }) => {
+const TodoItem = ({ todo }) => {
     const dispatch = useDispatch();
 
     const [isEditing, setIsEditing] =
@@ -15,7 +15,7 @@ const TodoItem = ({ todo, index }) => {
         dispatch({
             type: "EDIT_TODO",
             payload: {
-                index,
+                id: todo.id,
                 text,
             },
         });
@@ -31,7 +31,7 @@ const TodoItem = ({ todo, index }) => {
                 onChange={() =>
                     dispatch({
                         type: "TOGGLE_TODO",
-                        payload: index,
+                        payload: todo,
                     })
                 }
             />
@@ -74,7 +74,7 @@ const TodoItem = ({ todo, index }) => {
                 onClick={() =>
                     dispatch({
                         type: "DELETE_TODO",
-                        payload: index,
+                        payload: todo.id,
                     })
                 }
             >

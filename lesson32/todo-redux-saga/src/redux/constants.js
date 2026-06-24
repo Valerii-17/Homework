@@ -1,0 +1,1 @@
+export const API_URL = "https://6a3c1f42e4a07f202e167528.mockapi.io/TodoList";

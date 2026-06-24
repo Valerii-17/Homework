@@ -18,18 +18,25 @@ const todoSlice = createSlice({
         },
 
         deleteTodoSuccess: (state, action) => {
-            state.todos.splice(action.payload, 1);
+            state.todos = state.todos.filter(
+                (todo) => todo.id !== action.payload
+            );
         },
 
         toggleTodoSuccess: (state, action) => {
-            state.todos[action.payload].completed =
-                !state.todos[action.payload].completed;
+            state.todos = state.todos.map((todo) =>
+                todo.id === action.payload.id
+                    ? action.payload
+                    : todo
+            );
         },
 
         editTodoSuccess: (state, action) => {
-            const { index, text } = action.payload;
-
-            state.todos[index].text = text;
+            state.todos = state.todos.map((todo) =>
+                todo.id === action.payload.id
+                    ? action.payload
+                    : todo
+            );
         },
 
         clearCompletedSuccess: (state) => {
