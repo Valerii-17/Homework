@@ -9,7 +9,14 @@ const Header = () => {
             <Toolbar>
                 <Typography
                     variant="h6"
-                    sx={{ flexGrow: 1,fontWeight :"bold"}}
+                    component={NavLink}
+                    to="/"
+                    sx={{
+                        flexGrow: 1,
+                        fontWeight: "bold",
+                        color: "inherit",
+                        textDecoration: "none",
+                    }}
                 >
                     My Portfolio
                 </Typography>
