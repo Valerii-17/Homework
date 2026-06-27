@@ -8,7 +8,6 @@ import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
 import logo from "../assets/logo-white.svg";
 import { fetchProducts } from "../redux/slices/productSlice";
 
@@ -43,14 +42,14 @@ const ProductPreview = () => {
             </Box>
 
             <Button
+                variant="contained"
                 startIcon={<ArrowBackOutlinedIcon />}
                 onClick={() => navigate("/products")}
                 sx={{
                     backgroundColor: "#FFFFFF",
                     color: "#44B26F",
                     textTransform: "none",
-                    borderRadius: 0,
-                    boxShadow: "none",
+                    borderRadius: 2,
                     mb: 5,
 
                     "& .MuiButton-startIcon svg": {
@@ -59,7 +58,6 @@ const ProductPreview = () => {
 
                     "&:hover": {
                         backgroundColor: "#F5F5F5",
-                        boxShadow: "none",
                     },
                 }}
             >
@@ -84,6 +82,7 @@ const ProductPreview = () => {
                             display: "flex",
                             flexDirection: "column",
                             alignItems: "center",
+                            borderRadius: 1,
                             px: 2,
                             pt: 2,
                             pb: 2,

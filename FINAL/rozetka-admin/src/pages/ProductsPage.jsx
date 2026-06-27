@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -12,6 +13,8 @@ import ProductTable from "../components/ProductTable";
 import ProductModal from "../components/ProductModal";
 import DeleteModal from "../components/DeleteModal";
 
+import { TOKEN_KEY } from "../constants";
+
 import {
     fetchProducts,
     addProduct,
@@ -21,13 +24,13 @@ import {
 
 const ProductsPage = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [openModal, setOpenModal] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
 
     const [openDelete, setOpenDelete] = useState(false);
     const [productToDelete, setProductToDelete] = useState(null);
-
 
     const [sortField, setSortField] = useState(null);
     const [sortOrder, setSortOrder] = useState("asc");
@@ -40,20 +43,15 @@ const ProductsPage = () => {
         dispatch(fetchProducts());
     }, [dispatch]);
 
-
-
     const handleAddProduct = () => {
         setSelectedProduct(null);
         setOpenModal(true);
     };
 
-
-
     const handleEditProduct = (product) => {
         setSelectedProduct(product);
         setOpenModal(true);
     };
-
 
     const handleDeleteProduct = (product) => {
         setProductToDelete(product);
@@ -70,7 +68,6 @@ const ProductsPage = () => {
         setProductToDelete(null);
     };
 
-
     const handleSort = (field) => {
         if (sortField === field) {
             setSortOrder(
@@ -81,7 +78,6 @@ const ProductsPage = () => {
             setSortOrder("asc");
         }
     };
-
 
     const handleSave = async (data) => {
         if (selectedProduct) {
@@ -98,6 +94,10 @@ const ProductsPage = () => {
         setSelectedProduct(null);
     };
 
+    const handleLogout = () => {
+        localStorage.removeItem(TOKEN_KEY);
+        navigate("/login");
+    };
 
     const sortedProducts = [...products];
 
@@ -162,6 +162,7 @@ const ProductsPage = () => {
             >
                 <Header
                     onAddProduct={handleAddProduct}
+                    onLogout={handleLogout}
                 />
 
                 <ProductTable

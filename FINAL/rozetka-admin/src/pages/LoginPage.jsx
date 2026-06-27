@@ -1,6 +1,14 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import {useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {useForm} from "react-hook-form";
+import {TOKEN_KEY} from "../constants";
+import {loginUser} from "../services/authService";
+import logo from "../assets/logo.svg";
+
+import {
+    Visibility,
+    VisibilityOff,
+} from "@mui/icons-material";
 
 import {
     Box,
@@ -12,12 +20,8 @@ import {
     Typography,
 } from "@mui/material";
 
-import {
-    Visibility,
-    VisibilityOff,
-} from "@mui/icons-material";
 
-import logo from "../assets/logo.svg";
+
 
 const LoginPage = () => {
     const navigate = useNavigate();
@@ -28,21 +32,28 @@ const LoginPage = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: {errors},
     } = useForm();
 
-    const onSubmit = (data) => {
-        if (
-            data.username === "admin" &&
-            data.password === "12345"
-        ) {
-            setLoginError("");
+    const onSubmit = async (data) => {
+        setLoginError("");
 
-            localStorage.setItem("token", "token");
+        try {
+            const result = await loginUser(
+                data.username,
+                data.password
+            );
+
+            if (!result.success) {
+                setLoginError("Invalid username or password");
+                return;
+            }
+
+            localStorage.setItem(TOKEN_KEY, result.token);
 
             navigate("/products");
-        } else {
-            setLoginError("Invalid username or password");
+        } catch (error) {
+            setLoginError("Server error");
         }
     };
 
@@ -111,9 +122,9 @@ const LoginPage = () => {
                                         edge="end"
                                     >
                                         {showPassword ? (
-                                            <VisibilityOff />
+                                            <VisibilityOff/>
                                         ) : (
-                                            <Visibility />
+                                            <Visibility/>
                                         )}
                                     </IconButton>
                                 </InputAdornment>

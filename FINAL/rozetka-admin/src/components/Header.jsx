@@ -1,25 +1,55 @@
-import {Box, Button, Typography} from "@mui/material";
-import {useNavigate} from "react-router-dom";
+import { Box, Button, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 
 import logo from "../assets/logo-white.svg";
 
-const Header = ({onAddProduct}) => {
+const Header = ({ onAddProduct, onLogout }) => {
     const navigate = useNavigate();
 
     return (
         <>
-
-            <Box sx={{mb: 3}}>
+            <Box
+                sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    mb: 4,
+                }}
+            >
                 <img
                     src={logo}
                     alt="Rozetka"
-                    style={{width: 240}}
+                    style={{ width: 240 }}
                 />
-            </Box>
 
+                <Button
+                    variant="contained"
+                    onClick={onLogout}
+                    sx={{
+                        backgroundColor: "#FFFFFF",
+                        color: "#44B26F",
+                        fontSize: 12,
+                        textTransform: "none",
+                        borderRadius: 2,
+                        gap: 0.5,
+                        minWidth: 80,
+                        py: 1,
+                    }}
+                >
+                    <LogoutOutlinedIcon
+                        sx={{
+                            fontSize: 18,
+                            color: "#000",
+                        }}
+                    />
+
+                    Logout
+                </Button>
+            </Box>
 
             <Box
                 sx={{
@@ -37,8 +67,7 @@ const Header = ({onAddProduct}) => {
                         color: "#44B26F",
                         fontSize: 16,
                         textTransform: "none",
-                        borderRadius: 0,
-                        boxShadow: "none",
+                        borderRadius: 2,
                         gap: 1,
                     }}
                 >
@@ -60,8 +89,7 @@ const Header = ({onAddProduct}) => {
                         color: "#44B26F",
                         fontSize: 16,
                         textTransform: "none",
-                        borderRadius: 0,
-                        boxShadow: "none",
+                        borderRadius: 2,
                         gap: 1,
                     }}
                 >
@@ -75,7 +103,6 @@ const Header = ({onAddProduct}) => {
                     Add Product
                 </Button>
             </Box>
-
 
             <Typography
                 variant="h3"

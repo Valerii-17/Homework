@@ -1,7 +1,9 @@
 import axios from "axios";
 
+import { API_URL } from "../constants";
+
 const api = axios.create({
-    baseURL: "https://6a3e28ce0443193a1a0b8662.mockapi.io",
+    baseURL: API_URL,
 });
 
 export default api;
